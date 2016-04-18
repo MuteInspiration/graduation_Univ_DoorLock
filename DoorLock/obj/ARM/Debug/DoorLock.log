@@ -1,0 +1,2 @@
+﻿D:\공부\졸업작품\DoorLock\DoorLock\Dht.cpp(49,12): warning : conversion to ‘uint8_t {aka unsigned char}’ from ‘int’ may alter its value [-Wconversion]
+D:\공부\졸업작품\DoorLock\DoorLock\Doorlock.cpp(25,7): warning : conversion to ‘float’ from ‘int’ may alter its value [-Wconversion]

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <PreLaunchCommand>
+    </PreLaunchCommand>
+    <DebuggerFlavor>RaspberryDebugger</DebuggerFlavor>
+    <RemoteTarget>1489075702;192.168.1.104 (username=pi, port=22, authentication=Password)</RemoteTarget>
+  </PropertyGroup>
+</Project>
