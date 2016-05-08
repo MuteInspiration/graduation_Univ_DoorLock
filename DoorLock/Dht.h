@@ -10,8 +10,8 @@ private:
 
 	int dht11_val[5]; 
 
-	uint8_t lststate;
-	uint8_t counter;
+	int lststate;
+	int counter;
 
 
 

@@ -14,7 +14,6 @@ void getTemp(Doorlock *status, CDht* dht)
 		for (int i = 0; i < times; i++)
 		{
 			temper = dht->getTemperture();
-			cout << "Debug : Temperture = " << temper << endl;
 
 			if(temper < 50)
 				temp += temper;
