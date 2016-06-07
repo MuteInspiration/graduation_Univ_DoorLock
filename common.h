@@ -1,19 +1,24 @@
-#pragma once
+/*
+ * COMMON.hpp
+ *
+ *  Created on: 2016. 5. 17.
+ *      Author: Mute
+ */
 
-// Need to lboost-system OK
-// MySql++ 어캐쓰는건가
+#ifndef COMMON_H_
+#define COMMON_H_
+
 #include <wiringPi.h>
 #include <iostream>
 #include <cstring>
 #include <string>
 #include <cstdlib>
-
 #include <deque>
-#include <thread>
-#include <boost/asio.hpp>
+
 
 using namespace std;
 
 #define DHT_PIN 5		// GPIO5
 #define RELAY_PIN 4		// GPIO4
-#define DECT_PIN 8		// GPIO6
+
+#endif /* COMMON_H_ */

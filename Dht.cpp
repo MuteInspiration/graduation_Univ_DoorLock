@@ -68,6 +68,5 @@ int CDht::getTemperture()
 		return dht11_val[2];
 	}
 
-	cout << "Debugging for Temperture : " << dht11_val[2] << endl;
 	return dht11_val[2];
 }

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "common.h"
-#include "Dht.h"
+#include "COMMON.h"
+
+// 임계영역인 Doorlock 클래스
 
 class Doorlock
 {
 private:
 	bool isOpen;
-	CDht* dht;
 
 public:
 	Doorlock();
@@ -16,7 +16,7 @@ public:
 
 	void OpenDoor();
 	void CloseDoor();
-	void checkTemp();
+
 };
 
-void getTemp(Doorlock *status, CDht* dht);
+

@@ -1,58 +1,114 @@
-#include "common.h"
-#include "Net.h"
-#include <string>
+#include "COMMON.h"
+#include "CNet.h"
+#include "Doorlock.h"
+#include "Dht.h"
+#include "chat_message.h"
+#include <boost/thread/thread.hpp>
+#include <boost/bind.hpp>
+
 
 /*
 
-		스마트 디지털 도어락 개발일지
+ 	 온도 확인, 문열림,닫힘 확인,미들서버와 연결
 
-		16.04.08 Dht 송수신, 문열림 닫힘신호
-		16.05.12 boost Library 설치 완료. - Socket을 통해 안드로이드와 통신예정
-				  SHA-1 SALT 방식
-		16.05.13  Node.js 미들서버로 도입예정 -> 이 C++ App에서 Node.js 동시 실행해줄예정.
-		 outer.js를 실행 -> 만약 중간에 에러로 꺼지면??? 아직 방도 없음.
-*/
+ * 온도 확인 센서는 계속 동작해야함.
+ * 현재 io_service도 계속 동작해야됨. -> 소켓 비동기 프로그래밍
+ *
+ * 문여는 방법 2가지 경우
+ * 1. 응급시에
+ * 2. 사용자의 요청
+ *
+ * 응급시
+ * 1. 미들서버로 넘겨야됨.
+ *
+ * 전송의 종류
+ */
 
 
 
-int main(void)
+
+float getTemp(Doorlock *status, CDht* dht)
+{
+	while (true)
+	{
+		dht->initSig();
+		dht->StartSig();
+		int temp = 0;
+		int temper;
+		int times = 5;
+		float avg = 0.0;
+
+		for (int i = 0; i < times; i++)
+		{
+			temper = dht->getTemperture();
+
+			if(temper < 50)
+				temp += temper;
+
+			delay(2000);
+		}
+
+		avg = temp / times;
+
+
+
+		if (avg >= 45)
+		{
+				status->OpenDoor();
+		}
+
+		return avg;
+	}
+}
+
+using boost::asio::ip::tcp;
+int main(int argc, char* argv[])
 {
 	wiringPiSetup();
 	
 	try
 	{
-		//asio를 사용하는 모든 프로그램은 적어도 하나이상의 boost::asio::io_service 객체가 필요함
+		Doorlock dl;
+		CDht dht;
+
 		boost::asio::io_service io_service;
-		// boost::asio::ip::tcp::resolver를 사용하기 위해 어플리케이션의 매개변수로 정의된 서버의 이름 TCP 단말점으로 변환해야된다
-		tcp::resolver resolver(io_service);	// resolver = 결정자
 
-		// 인자는 Query라고 부르며 boost::asio::ip::tcp::resolver::iterator 타입의 반복자를 이용해서 반환됨.
-		auto endpoint_iterator = resolver.resolve( {"127.0.0.1", "2551"} );
+		tcp::resolver resolver(io_service);
+		tcp::resolver::query query(argv[1], argv[2]);
+		tcp::resolver::iterator iterator = resolver.resolve(query);
 
+		CNet c(io_service, iterator, &dl);
+		boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
 
-		CNet net(io_service, endpoint_iterator);
-
-		thread t([&io_service]() { io_service.run(); });		// 람다식
 		char line[chat_message::max_body_length + 1];
 
-		// 메세지 입력
-		while(cin.getline(line, chat_message::max_body_length + 1))
+		// 송신 위험할때.
+		while(true)
 		{
-			chat_message msg;
-			msg.body_length(strlen(line));
-			memcpy(msg.body(), line, msg.body_length());
-			msg.encode_header();
-			net.write(msg);	// 전송
+			if(getTemp(&dl, &dht) >= 45)
+			{
+				chat_message msg;
+				strcpy(line, "warning");
+				msg.body_length(strlen(line));
+				memcpy(msg.body(), line, msg.body_length());  // msg.body()에 line을 msg.body_length()만큼 복사
+				msg.encode_header();
+				c.write(msg);
+			}
 		}
 
+		c.close();
+		t.join();
 
-		net.close();		// 연결 닫기
-		t.join();		//
 	}
-	catch(exception& e)
+	catch (std::exception& e)
 	{
-		cerr << "Exception : " << e.what() << "\n";
+		std::cerr << "Exception: " << e.what() << "\n";
 	}
+
+
+
+
+
 
 	return 0;
 }

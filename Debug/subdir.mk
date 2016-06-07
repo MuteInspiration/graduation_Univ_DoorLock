@@ -4,21 +4,21 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../CNet.cpp \
 ../Dht.cpp \
 ../Doorlock.cpp \
-../Net.cpp \
 ../main.cpp 
 
 OBJS += \
+./CNet.o \
 ./Dht.o \
 ./Doorlock.o \
-./Net.o \
 ./main.o 
 
 CPP_DEPS += \
+./CNet.d \
 ./Dht.d \
 ./Doorlock.d \
-./Net.d \
 ./main.d 
 
 
