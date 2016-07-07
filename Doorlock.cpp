@@ -16,19 +16,15 @@ Doorlock::~Doorlock()
 
 void Doorlock::OpenDoor()
 {
-
-	if (isOpen == false)
-	{
-		// 여기에 체크하는 함수를 넣어야함.
-		digitalWrite(RELAY_PIN, HIGH);
-		delay(1000);
-		digitalWrite(RELAY_PIN, LOW);
-		isOpen = true;
-	}
-
+	cout << "The Door is Opening now \n";
+	// 여기에 체크하는 함수를 넣어야함.
+	digitalWrite(RELAY_PIN, HIGH);
+	delay(1000);
+	digitalWrite(RELAY_PIN, LOW);
+	isOpen = true;
 
 }
-
+/*
 void Doorlock::CloseDoor()
 {
 	if (isOpen == true)
@@ -40,6 +36,5 @@ void Doorlock::CloseDoor()
 		isOpen = false;
 	}
 }
-
-
+*/
 

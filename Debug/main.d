@@ -602,7 +602,6 @@ main.o: ../main.cpp ../COMMON.h \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/bind/bind_mf_cc.hpp \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/bind/bind_mf2_cc.hpp \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/bind/placeholders.hpp \
- ../chat_message.h ../Doorlock.h ../Dht.h \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/thread.hpp \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/thread_only.hpp \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/detail/platform.hpp \
@@ -738,7 +737,8 @@ main.o: ../main.cpp ../COMMON.h \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/move/adl_move_swap.hpp \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/move/make_unique.hpp \
  E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/shared_mutex.hpp \
- E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/pthread/shared_mutex.hpp
+ E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/pthread/shared_mutex.hpp \
+ ../chat_message.h ../Doorlock.h ../Dht.h
 
 ../COMMON.h:
 
@@ -1948,12 +1948,6 @@ E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/bind/bind_mf2_cc.h
 
 E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/bind/placeholders.hpp:
 
-../chat_message.h:
-
-../Doorlock.h:
-
-../Dht.h:
-
 E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/thread.hpp:
 
 E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/thread_only.hpp:
@@ -2225,3 +2219,9 @@ E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/move/make_unique.h
 E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/shared_mutex.hpp:
 
 E:\SysGCC\arm-linux-gnueabihf\sysroot\usr\local\include/boost/thread/pthread/shared_mutex.hpp:
+
+../chat_message.h:
+
+../Doorlock.h:
+
+../Dht.h:

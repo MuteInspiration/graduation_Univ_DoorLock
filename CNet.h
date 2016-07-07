@@ -1,15 +1,17 @@
 
-#include <cstdlib>
-#include <deque>
-#include <iostream>
+
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
+#include <boost/thread/thread.hpp>
+#include "COMMON.h"
 #include "chat_message.h"
 #include "Doorlock.h"
+#include "Dht.h"
 
 using boost::asio::ip::tcp;
 
 typedef std::deque<chat_message> chat_message_queue;
+
 
 class CNet
 {
@@ -29,6 +31,12 @@ public:
 
 	void write(const chat_message& msg);
 	void close();
+	bool isRun() { return isrun; }
+	void setIpPort(char *ip, char *port)
+	{
+		strcpy(ipaddress, ip);
+		strcpy(this->port, port);
+	}
 
 private:
 
@@ -44,6 +52,12 @@ private:
 	chat_message read_msg_;
 	chat_message_queue write_msgs_;
 	Doorlock * doorlock;
+	bool isrun = false;
+
+	char * ipaddress;
+	char * port;
 };
 
+float getTemp(Doorlock *status, CDht* dht);
+void running(char* ip, char *port);
 

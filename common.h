@@ -21,4 +21,5 @@ using namespace std;
 #define DHT_PIN 5		// GPIO5
 #define RELAY_PIN 4		// GPIO4
 
+
 #endif /* COMMON_H_ */
