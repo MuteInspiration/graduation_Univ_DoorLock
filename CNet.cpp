@@ -14,6 +14,7 @@ void CNet::write(const chat_message& msg)
 {
 	// 메세지 전송
 	io_service_.post(boost::bind(&CNet::do_write, this, msg));
+	// post 메서드를 호출해서 내부의 io serv
 }
 
 void CNet::close()
