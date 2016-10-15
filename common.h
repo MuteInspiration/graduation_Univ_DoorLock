@@ -14,7 +14,8 @@
 #include <string>
 #include <cstdlib>
 #include <deque>
-
+#include <cmath>
+#include <ctime>
 
 using namespace std;
 

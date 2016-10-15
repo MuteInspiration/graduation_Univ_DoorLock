@@ -57,6 +57,20 @@ public:
 					boost::asio::placeholders::error));
 
 			doorlock = dl;
+
+			Eratosthenes(numbers, 10000);
+			addPrime(primes, numbers);
+			 p = getRandomePrime(primes);
+			 q = getRandomePrime(primes);
+
+			 while (p != q)
+				  q = getRandomePrime(primes);
+
+			  N = p * q;
+			  euler = (p - 1) * (q - 1);
+
+			  e = getE(N);
+			  d = getD(e, euler);
 		}
 
 	void write(const chat_message& msg);
@@ -86,8 +100,25 @@ private:
 
 	char * ipaddress;
 	char * port;
+	long N, e, d, N, euler;
+	int p, q;
+	vector<int> numbers;
+	vector<int> primes;
 };
 
 float getTemp(Doorlock *status, CDht* dht);
 void running(char* ip, char *port);
 
+
+void Eratosthenes(vector <int> &numbers, int number);
+void addPrime(vector <int> &prime, vector <int> &number);
+unsigned getRandomePrime(vector <int> &prime);
+
+// 서로소를 구해라 
+long getE(const unsigned &euler);
+long long getD(const unsigned& e, const unsigned& euler);
+long GCD(unsigned u, unsigned v);
+
+
+vector<unsigned long long>& encryption(char* str, const long &N, const long &e);
+vector<char>* decryption(vector<unsigned long long> & v, const long long &d, const long &N);
